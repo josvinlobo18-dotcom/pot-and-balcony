@@ -19,6 +19,7 @@
     "@fontsource/caveat": "^5.1.0",
     "astro": "^5.0.0",
     "remark-directive": "^3.0.0",
+    "@astrojs/sitemap": "^3.2.1",
     "unist-util-visit": "^5.0.0"
   }
 }
