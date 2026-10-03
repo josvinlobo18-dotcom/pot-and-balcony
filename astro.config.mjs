@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
 import { remarkPotDirectives } from './src/plugins/remark-directives.mjs';
 
@@ -8,9 +9,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },
+  integrations: [sitemap()],
   markdown: {
-    // remark-directive must come first; remarkPotDirectives turns
-    // ::figure / ::product / :::field-notes into HTML at build time.
     remarkPlugins: [remarkDirective, remarkPotDirectives],
     smartypants: true,
   },
