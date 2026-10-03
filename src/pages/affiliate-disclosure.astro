@@ -1,0 +1,52 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PlaceholderBanner from '../components/PlaceholderBanner.astro';
+import { SITE } from '../config/site';
+---
+
+<PageLayout
+  title="Affiliate Disclosure"
+  kicker="Transparency"
+  description="How Pot and Balcony earns money from affiliate links, and why it never changes what gets recommended."
+>
+  <PlaceholderBanner>
+    This disclosure uses placeholder wording. Replace it with your final text once your Amazon Associates account is approved,
+    and have it checked against current Amazon Associates Operating Agreement rules and FTC / ASA (UK) guidance.
+  </PlaceholderBanner>
+
+  <p><em>Last updated: {SITE.legalUpdated}</em></p>
+
+  <h2>The short version</h2>
+  <p>
+    Some links on {SITE.name} are affiliate links. If you click one and buy something, I may earn a small commission at no
+    extra cost to you. That commission helps pay for the site and for the gear I test.
+  </p>
+
+  <h2>Amazon Associates</h2>
+  <p>
+    {SITE.name} participates in the Amazon Associates Programme, an affiliate advertising programme designed to provide a means
+    for sites to earn advertising fees by advertising and linking to Amazon. <strong>As an Amazon Associate I earn from qualifying purchases.</strong>
+  </p>
+
+  <h2>How I choose what to recommend</h2>
+  <ul>
+    <li>I recommend gear I&rsquo;ve used on my own balcony, or I say clearly that I haven&rsquo;t tested it.</li>
+    <li>Affiliate commissions never decide what gets recommended, or how it&rsquo;s scored.</li>
+    <li>I will say when something isn&rsquo;t worth buying, even if it has an affiliate programme.</li>
+  </ul>
+
+  <h2>How you can tell</h2>
+  <p>
+    Posts that contain affiliate links carry a notice near the top, and product boxes are labelled as affiliate links. Links
+    to products are marked <code>rel="sponsored"</code> so search engines know they&rsquo;re commercial.
+  </p>
+
+  <h2>Prices and availability</h2>
+  <p>
+    Prices and availability change often. Any price shown is accurate only at the date given and may differ on the retailer&rsquo;s
+    site &mdash; always check the current price before you buy.
+  </p>
+
+  <h2>Questions</h2>
+  <p>Ask me anything about how this works: <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use the <a href="/contact/">contact form</a>.</p>
+</PageLayout>

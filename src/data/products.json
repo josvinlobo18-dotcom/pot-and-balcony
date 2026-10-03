@@ -1,0 +1,55 @@
+{
+  "_readme": "CENTRAL AFFILIATE PRODUCT CONFIG. Articles reference products by ID only, e.g. ::product{id=\"sample-led-grow-light\"}. To fix a dead or changed link, edit the 'url' on that one entry. Keys starting with _ are ignored. Every entry below is SAMPLE/PLACEHOLDER data with \"placeholder\": true — replace the URLs, names, images and prices with real ones and remove the placeholder flag. Amazon Associates rules restrict showing stale prices, so only keep 'price' if you update it; otherwise delete 'price' and 'priceChecked' and the box will just say 'Check price'.",
+
+  "sample-self-watering-planter": {
+    "name": "SAMPLE Self-Watering Planter (60 cm)",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "price": "£34.99",
+    "priceChecked": "PLACEHOLDER — date",
+    "badge": "Sample pick",
+    "blurb": "Placeholder description of a reservoir planter that stretches the gap between waterings on a sunny balcony.",
+    "points": ["Large water reservoir", "Lightweight when empty", "Fill-tube for easy topping up"],
+    "placeholder": true
+  },
+
+  "sample-led-grow-light": {
+    "name": "SAMPLE Full-Spectrum LED Grow Light",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "price": "£49.99",
+    "priceChecked": "PLACEHOLDER — date",
+    "blurb": "Placeholder description of a compact grow light for winter windowsill and countertop growing.",
+    "points": ["Full-spectrum white light", "Built-in timer", "Low running cost"],
+    "placeholder": true
+  },
+
+  "sample-railing-planter-no-drill": {
+    "name": "SAMPLE No-Drill Railing Planter",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "blurb": "Placeholder description of a planter that hooks over a balcony railing with no drilling and no marks.",
+    "points": ["Clamps on — no drilling", "Adjustable to railing width", "Drainage tray included"],
+    "placeholder": true
+  },
+
+  "sample-balcony-greenhouse": {
+    "name": "SAMPLE Balcony Mini Greenhouse",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "price": "£89.99",
+    "priceChecked": "PLACEHOLDER — date",
+    "badge": "Sample pick",
+    "blurb": "Placeholder description of a freestanding, tiered greenhouse that extends the season on a small balcony.",
+    "points": ["Freestanding — no fixing", "Roll-up zip door", "Folds flat for winter storage"],
+    "placeholder": true
+  }
+}

@@ -1,0 +1,66 @@
+---
+import { SITE } from '../config/site';
+import { abs } from '../utils/schema';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Use the title exactly as given (home page). Otherwise " | Pot and Balcony" is appended. */
+  rawTitle?: boolean;
+  /** Path or absolute URL of the share image. Defaults to the site OG image. */
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  section?: string;
+  noindex?: boolean;
+  jsonLd?: object[];
+}
+
+const {
+  title,
+  description,
+  rawTitle = false,
+  image = SITE.defaultOgImage,
+  imageAlt = SITE.name,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  section,
+  noindex = false,
+  jsonLd = [],
+} = Astro.props;
+
+const fullTitle = rawTitle ? title : `${title} | ${SITE.name}`;
+const canonical = abs(Astro.url.pathname);
+const ogImage = abs(image);
+const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const safeJson = (obj: object) => JSON.stringify(obj).replace(/</g, '\\u003c');
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={robots} />
+
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={SITE.ogLocale} />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={imageAlt} />
+{publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+{type === 'article' && <meta property="article:author" content={SITE.author.name} />}
+{section && <meta property="article:section" content={section} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+{jsonLd.map((obj) => <script type="application/ld+json" set:html={safeJson(obj)} />)}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Placeholder photo">
+  <rect width="900" height="675" fill="#ccd5ae"/>
+  <circle cx="720" cy="140" r="90" fill="#e9edc9"/>
+  <path d="M0 560 L220 380 L380 500 L560 330 L900 590 V675 H0Z" fill="#a3b18a"/>
+  <path d="M0 610 L260 470 L430 570 L640 440 L900 640 V675 H0Z" fill="#01472e" opacity=".85"/>
+  <rect x="250" y="270" width="400" height="135" rx="14" fill="#fefae0" stroke="#01472e" stroke-width="4"/>
+  <text x="450" y="333" text-anchor="middle" font-family="Impact, 'Arial Narrow', sans-serif" font-size="46" letter-spacing="3" fill="#01472e">PLACEHOLDER PHOTO</text>
+  <text x="450" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#01472e">Replace with one of Josh&#8217;s own photos</text>
+</svg>

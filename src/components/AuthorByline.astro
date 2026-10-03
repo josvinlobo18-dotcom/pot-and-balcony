@@ -1,0 +1,36 @@
+---
+import { SITE } from '../config/site';
+import { formatDate } from '../utils/articles';
+
+export interface Props {
+  /** "byline" = compact line under the headline. "box" = full author card at the end of a post. */
+  variant?: 'byline' | 'box';
+  pubDate?: Date;
+  updatedDate?: Date;
+  minutes?: number;
+}
+const { variant = 'byline', pubDate, updatedDate, minutes } = Astro.props;
+const a = SITE.author;
+---
+
+{variant === 'byline' ? (
+  <div class="byline">
+    <img class="byline__avatar" src={a.avatar} alt={`Photo of ${a.name}`} width="52" height="52" />
+    <div class="byline__text">
+      <strong>By <a href="/about/" rel="author">{a.name}</a></strong>
+      <span class="byline__meta">
+        {pubDate && <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>}
+        {updatedDate && <> · Updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time></>}
+        {minutes && <> · {minutes} min read</>}
+      </span>
+    </div>
+  </div>
+) : (
+  <aside class="author-box" aria-label="About the author">
+    <img src={a.avatar} alt={`Photo of ${a.name}`} width="80" height="80" loading="lazy" />
+    <div>
+      <h2>Written by {a.name}</h2>
+      <p>{a.bio} <a href="/about/">More about me &rarr;</a></p>
+    </div>
+  </aside>
+)}

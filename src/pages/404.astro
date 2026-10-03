@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found" description="That page doesn't exist — but there's plenty growing elsewhere on Pot and Balcony." noindex>
+  <section class="section section--sage">
+    <div class="container container--narrow nf">
+      <p class="kicker">Error 404</p>
+      <h1>This pot&rsquo;s empty.</h1>
+      <p class="lede">The page you&rsquo;re after has moved, or never existed. Try one of these instead.</p>
+      <div class="btn-row">
+        <a class="btn" href="/">Home</a>
+        <a class="btn btn--ghost" href="/balcony-growing/">Balcony growing</a>
+        <a class="btn btn--ghost" href="/gear-guides/">Gear guides</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { padding-block: var(--s-8); }
+  .nf h1 { margin-bottom: var(--s-4); }
+  .nf .lede { margin-bottom: var(--s-6); }
+</style>

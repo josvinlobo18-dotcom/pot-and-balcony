@@ -1,0 +1,25 @@
+---
+import { PILLARS } from '../config/pillars';
+import { formatDate, pillarOf, readingTime, urlOf, type Article } from '../utils/articles';
+
+export interface Props {
+  article: Article;
+}
+const { article } = Astro.props;
+const d = article.data;
+const pillar = PILLARS[pillarOf(article)];
+---
+
+<article class="article-card">
+  <div class="article-card__media">
+    {d.heroImage
+      ? <img src={d.heroImage} alt="" width="800" height="500" loading="lazy" decoding="async" />
+      : <span class="article-card__num" aria-hidden="true">{pillar.number}</span>}
+  </div>
+  <div class="article-card__body">
+    <p class="article-card__kicker">{pillar.title}{d.placeholder ? ' · Placeholder' : ''}</p>
+    <h3><a href={urlOf(article)}>{d.title}</a></h3>
+    <p class="article-card__desc">{d.description}</p>
+    <p class="article-card__meta">{formatDate(d.pubDate)} · {readingTime(article.body)} min read</p>
+  </div>
+</article>

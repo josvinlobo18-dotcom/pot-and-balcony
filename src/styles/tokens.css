@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Design tokens — Pot and Balcony
+   Palette is fixed by the design brief. Dark text is ALWAYS Forest, never black.
+   ========================================================================== */
+:root {
+  /* Palette */
+  --forest: #01472e; /* primary dark: text, headings, dark sections */
+  --sage: #ccd5ae; /* hero backgrounds, section fills */
+  --olive: #e9edc9; /* card backgrounds, alternating sections */
+  --cream: #fefae0; /* page background, article body */
+  --moss: #a3b18a; /* secondary accents, borders */
+
+  /* Roles */
+  --bg: var(--cream);
+  --text: var(--forest);
+  /* Moss on cream is too light for body text (fails WCAG AA), so muted text is Forest eased toward Cream. */
+  --text-muted: color-mix(in srgb, var(--forest) 78%, var(--cream));
+  --border: var(--moss);
+  --border-soft: color-mix(in srgb, var(--moss) 55%, var(--cream));
+
+  /* Type */
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-hand: 'Caveat', 'Segoe Print', cursive;
+
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-base: 1.0625rem;
+  --fs-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+  --fs-h4: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+  --fs-h3: clamp(1.5rem, 1.25rem + 1.1vw, 2.1rem);
+  --fs-h2: clamp(2rem, 1.5rem + 2.4vw, 3.4rem);
+  --fs-h1: clamp(2.9rem, 1.8rem + 5.6vw, 6.4rem);
+
+  /* Space */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: clamp(4rem, 3rem + 5vw, 7.5rem);
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius: 16px;
+  --radius-lg: 28px;
+  --shadow: 0 1px 0 color-mix(in srgb, var(--forest) 12%, transparent),
+    0 10px 30px -12px color-mix(in srgb, var(--forest) 28%, transparent);
+  --shadow-lift: 0 2px 0 color-mix(in srgb, var(--forest) 14%, transparent),
+    0 22px 40px -16px color-mix(in srgb, var(--forest) 38%, transparent);
+
+  /* Layout */
+  --container: 72rem;
+  --container-narrow: 48rem;
+  --prose: 42rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --header-h: 4.5rem;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

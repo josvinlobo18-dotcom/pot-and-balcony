@@ -1,0 +1,99 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AuthorByline from '../components/AuthorByline.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import AffiliateNotice from '../components/AffiliateNotice.astro';
+import PlaceholderBanner from '../components/PlaceholderBanner.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import { PILLARS } from '../config/pillars';
+import { pillarOf, readingTime, urlOf, type Article } from '../utils/articles';
+import { articleSchema, breadcrumbSchema, organizationSchema } from '../utils/schema';
+import type { MarkdownHeading } from 'astro';
+
+export interface Props {
+  article: Article;
+  headings: MarkdownHeading[];
+  related: Article[];
+}
+
+const { article, headings, related } = Astro.props;
+const d = article.data;
+const pillar = PILLARS[pillarOf(article)];
+const minutes = readingTime(article.body);
+
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const showToc = d.toc ?? tocHeadings.length >= 3;
+const hasAffiliate = /^::product\{/m.test(article.body ?? '');
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: pillar.title, href: `/${pillar.slug}/` },
+  { name: d.title },
+];
+---
+
+<BaseLayout
+  title={d.seoTitle ?? d.title}
+  description={d.description}
+  type="article"
+  image={d.heroImage}
+  imageAlt={d.heroAlt ?? d.title}
+  publishedTime={d.pubDate}
+  modifiedTime={d.updatedDate ?? d.pubDate}
+  section={pillar.title}
+  noindex={d.placeholder}
+  jsonLd={[
+    articleSchema(article),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: pillar.title, path: `/${pillar.slug}/` },
+      { name: d.title, path: urlOf(article) },
+    ]),
+    organizationSchema(),
+  ]}
+>
+  <header class="article-header">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker"><a class="article-kicker" href={`/${pillar.slug}/`}>{pillar.title}</a></p>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.description}</p>
+      <AuthorByline pubDate={d.pubDate} updatedDate={d.updatedDate} minutes={minutes} />
+    </div>
+  </header>
+
+  {d.heroImage ? (
+    <div class="container">
+      <figure class="article-hero" style="margin-bottom: var(--s-6)">
+        <img src={d.heroImage} alt={d.heroAlt} width="1600" height="900" fetchpriority="high" decoding="async" />
+        {d.heroCaption && <figcaption>{d.heroCaption}</figcaption>}
+      </figure>
+    </div>
+  ) : (
+    <div class="article-header-spacer" aria-hidden="true"></div>
+  )}
+
+  <div class="article-body">
+    <div class="container">
+      {d.placeholder && (
+        <PlaceholderBanner>
+          This is sample content to show the article template. Delete or replace it before launch (see docs/PLACEHOLDERS.md).
+        </PlaceholderBanner>
+      )}
+
+      <div class={`article-layout ${showToc ? 'has-toc' : 'no-toc'}`}>
+        {showToc && <TableOfContents headings={headings} />}
+        <div>
+          {hasAffiliate && <AffiliateNotice />}
+          <div class="prose">
+            <slot />
+          </div>
+          <AuthorByline variant="box" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <RelatedArticles articles={related} />
+</BaseLayout>

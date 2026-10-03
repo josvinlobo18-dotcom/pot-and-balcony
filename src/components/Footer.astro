@@ -1,0 +1,48 @@
+---
+import { SITE } from '../config/site';
+import { PILLARS, PILLAR_ORDER } from '../config/pillars';
+import LogoMark from './LogoMark.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="wordmark" href="/">
+          <LogoMark />
+          <span>Pot and Balcony</span>
+        </a>
+        <p>{SITE.tagline} Real setups from a real balcony, for people who rent.</p>
+        <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      </div>
+
+      <div>
+        <h2>Explore</h2>
+        <ul class="footer-links">
+          {PILLAR_ORDER.map((slug) => (
+            <li><a href={`/${slug}/`}>{PILLARS[slug].title}</a></li>
+          ))}
+          <li><a href="/about/">About Josh</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>The small print</h2>
+        <ul class="footer-links">
+          <li><a href="/affiliate-disclosure/">Affiliate disclosure</a></li>
+          <li><a href="/privacy-policy/">Privacy policy</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {year} {SITE.name}. All rights reserved.</p>
+      <!-- PLACEHOLDER: replace with your approved Amazon Associates wording -->
+      <p>As an Amazon Associate I earn from qualifying purchases. Some links on this site are affiliate links.</p>
+    </div>
+  </div>
+</footer>

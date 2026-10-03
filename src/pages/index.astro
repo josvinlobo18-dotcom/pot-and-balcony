@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { SITE } from '../config/site';
+import { PILLARS, PILLAR_ORDER } from '../config/pillars';
+import { getArticles } from '../utils/articles';
+import { organizationSchema, websiteSchema } from '../utils/schema';
+
+const latest = (await getArticles()).slice(0, 3);
+
+const constraints = [
+  ['No drilling', 'Clamp-on, hook-over and freestanding setups that leave the railing exactly as you found it.'],
+  ['Weight limits', 'What a wet 40-litre planter really weighs, and how to spread the load.'],
+  ['Wind & heat', 'Upper-floor gusts and baking masonry change what survives. Plan for it.'],
+  ['Water access', 'No outdoor tap? Self-watering and low-effort routines that actually work.'],
+  ['Landlords', 'Setups that look tidy, stay inside the lease and can be packed away.'],
+  ['Dark winters', 'Grow lights and microgreens for when the balcony shuts down.'],
+];
+---
+
+<BaseLayout
+  rawTitle
+  title="Pot and Balcony — Grow Food on a Balcony, Windowsill or Indoors"
+  description={SITE.description}
+  jsonLd={[organizationSchema(), websiteSchema()]}
+>
+  <!-- HERO -->
+  <section class="hero section section--sage">
+    <div class="hero__shape hero__shape--a" aria-hidden="true"></div>
+    <div class="hero__shape hero__shape--b" aria-hidden="true"></div>
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="kicker">For renters with small spaces</p>
+        <h1>Grow real food.<br />No garden.<br />No drilling.</h1>
+        <p class="lede">
+          I&rsquo;m Josh. I rent, I have a balcony, and I&rsquo;m working out &mdash; out loud, with photos &mdash; how to grow
+          proper food in the space I&rsquo;ve actually got. These are the setups, mistakes and gear that held up.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="/balcony-growing/">Start with the balcony <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn--ghost" href="/about/">Meet Josh</a>
+        </div>
+      </div>
+      <figure class="hero__photo">
+        <!-- PLACEHOLDER: replace with a real photo of Josh's balcony -->
+        <img src="/images/placeholder/photo-landscape.svg" alt="Placeholder for a photo of Josh's balcony growing setup" width="900" height="675" fetchpriority="high" />
+        <figcaption>my actual balcony <em>(photo coming soon)</em></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee on-dark" aria-hidden="true">
+    <div class="marquee__track">
+      {[0, 1].map(() => (
+        <span class="marquee__set">
+          <span>No drilling</span><i></i><span>6 m² is plenty</span><i></i><span>Tested on a real balcony</span><i></i><span>Winter-proof</span><i></i><span>Landlord-approved-ish</span><i></i>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- MEET JOSH -->
+  <section class="section section--cream">
+    <div class="container meet">
+      <img class="meet__avatar" src={SITE.author.avatar} alt="Placeholder portrait of Josh" width="320" height="320" loading="lazy" />
+      <div>
+        <p class="kicker">Who&rsquo;s behind this</p>
+        <h2>One person. One balcony. Zero fluff.</h2>
+        <p class="lede">
+          Pot and Balcony isn&rsquo;t a content farm. It&rsquo;s a notebook that happens to be public. Everything here
+          comes from my own setup &mdash; the wind that flattened my first tomatoes, the planter that survived, the
+          grow light I almost sent back.
+        </p>
+        <p>
+          I use AI to help with research and drafting, and every guide is shaped by what I&rsquo;ve actually seen on my
+          balcony. If I haven&rsquo;t tested it, I&rsquo;ll say so.
+        </p>
+        <p><a class="btn btn--ghost" href="/about/">Read my story <span class="arrow" aria-hidden="true">&rarr;</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="section section--olive">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Three ways in</p>
+        <h2>Pick where you&rsquo;re stuck</h2>
+      </div>
+      <div class="pillar-grid">
+        {PILLAR_ORDER.map((slug) => {
+          const p = PILLARS[slug];
+          return (
+            <article class="pillar-card">
+              <span class="pillar-card__num" aria-hidden="true">{p.number}</span>
+              <h3><a href={`/${p.slug}/`}>{p.title}</a></h3>
+              <p class="pillar-card__tagline">{p.tagline}</p>
+              <ul class="pillar-card__topics">
+                {p.topics.map((t) => <li>{t}</li>)}
+              </ul>
+              <p class="pillar-card__cta"><span>Explore {p.short.toLowerCase()} guides</span> <span class="arrow" aria-hidden="true">&rarr;</span></p>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST -->
+  {latest.length > 0 && (
+    <section class="section section--cream">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Fresh from the balcony</p>
+          <h2>Latest guides</h2>
+        </div>
+        <div class="card-grid">
+          {latest.map((article) => <ArticleCard article={article} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CONSTRAINTS -->
+  <section class="section section--forest">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">The reality check</p>
+        <h2>Written for the constraints you actually have</h2>
+        <p class="lede muted">Not hobbyists with a back garden &mdash; people with a 6 m² balcony and a south-facing window.</p>
+      </div>
+      <ul class="constraints">
+        {constraints.map(([title, text]) => (
+          <li>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--sage">
+    <div class="container container--narrow cta">
+      <h2>It starts on a balcony. It doesn&rsquo;t end there.</h2>
+      <p class="lede">
+        This site is step one of a longer plan: learning to grow food at a scale that goes well beyond a few pots.
+        Follow along as it develops.
+      </p>
+      <div class="btn-row cta__row">
+        <a class="btn" href="/about/">Why I&rsquo;m doing this <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn--ghost" href="/contact/">Say hello</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { overflow: hidden; padding-block: var(--s-8) var(--s-9); border-bottom: 2px solid var(--forest); }
+  .hero__shape { position: absolute; border-radius: 50%; z-index: 0; pointer-events: none; }
+  .hero__shape--a { width: 34rem; height: 34rem; right: -10rem; top: -12rem; background: var(--olive); }
+  .hero__shape--b { width: 18rem; height: 18rem; left: -6rem; bottom: -8rem; background: var(--moss); opacity: 0.55; }
+  .hero__grid { position: relative; z-index: 1; display: grid; gap: var(--s-7); align-items: center; }
+  .hero h1 { margin-bottom: var(--s-5); }
+  .hero .lede { margin-bottom: var(--s-6); }
+  .hero__photo { margin: 0; position: relative; }
+  .hero__photo img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 2px solid var(--forest);
+    border-radius: var(--radius-lg);
+    box-shadow: 10px 10px 0 var(--forest);
+    background: var(--olive);
+    transform: rotate(1.5deg);
+    transition: transform 0.5s var(--ease);
+  }
+  .hero__photo:hover img { transform: rotate(0deg); }
+  .hero__photo figcaption {
+    font-family: var(--font-hand);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    margin-top: var(--s-5);
+    padding-left: var(--s-3);
+  }
+  .hero__photo em { font-style: normal; opacity: 0.8; }
+  @media (min-width: 60rem) { .hero__grid { grid-template-columns: 1.15fr 0.85fr; gap: var(--s-8); } }
+
+  .marquee { background: var(--forest); color: var(--cream); overflow: hidden; border-bottom: 2px solid var(--forest); }
+  .marquee__track { display: flex; width: max-content; animation: scroll 38s linear infinite; }
+  .marquee__set { display: flex; align-items: center; gap: var(--s-6); padding: var(--s-4) var(--s-3); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.4rem; white-space: nowrap; }
+  .marquee__set i { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--moss); flex: none; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  .meet { display: grid; gap: var(--s-7); align-items: center; }
+  .meet__avatar { width: min(100%, 20rem); aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--forest); background: var(--sage); box-shadow: 8px 8px 0 var(--moss); justify-self: center; }
+  .meet h2 { margin-bottom: var(--s-4); }
+  @media (min-width: 52rem) { .meet { grid-template-columns: 20rem 1fr; gap: var(--s-8); } }
+
+  .pillar-grid { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+  .pillar-card {
+    position: relative;
+    background: var(--cream);
+    border: 2px solid var(--forest);
+    border-radius: var(--radius);
+    padding: var(--s-6) var(--s-5) var(--s-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background-color 0.3s var(--ease);
+  }
+  .pillar-card:hover { transform: translateY(-6px); box-shadow: 8px 8px 0 var(--forest); background: var(--sage); }
+  .pillar-card__num { font-family: var(--font-display); font-size: 4.5rem; line-height: 0.9; color: var(--moss); }
+  .pillar-card h3 a { text-decoration: none; }
+  .pillar-card h3 a::after { content: ''; position: absolute; inset: 0; }
+  .pillar-card__tagline { font-weight: 600; margin: 0; }
+  .pillar-card__topics { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .pillar-card__topics li { font-size: var(--fs-xs); font-weight: 600; border: 1.5px solid var(--forest); border-radius: 999px; padding: 0.15rem 0.7rem; }
+  .pillar-card__cta { margin: auto 0 0; padding-top: var(--s-4); font-weight: 700; display: flex; gap: 0.5rem; }
+  .pillar-card:hover .arrow { transform: translateX(6px); }
+  .arrow { display: inline-block; transition: transform 0.25s var(--ease); }
+
+  .constraints { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .constraints li { border-top: 3px solid var(--moss); padding-top: var(--s-4); }
+  .constraints h3 { font-size: 1.7rem; margin-bottom: var(--s-2); }
+  .constraints p { margin: 0; font-size: var(--fs-sm); color: color-mix(in srgb, var(--cream) 88%, var(--forest)); }
+
+  .cta { text-align: center; }
+  .cta h2 { margin-bottom: var(--s-4); }
+  .cta .lede { margin-inline: auto; margin-bottom: var(--s-6); }
+  .cta__row { justify-content: center; }
+</style>

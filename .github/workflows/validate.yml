@@ -1,0 +1,21 @@
+name: Validate build
+
+# Cloudflare Pages does the real build + deploy. This workflow only checks that
+# the site still builds (bad frontmatter, unknown product IDs, etc.) so problems
+# are visible on the commit in GitHub.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build

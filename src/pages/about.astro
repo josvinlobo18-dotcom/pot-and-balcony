@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PlaceholderBanner from '../components/PlaceholderBanner.astro';
+import { SITE } from '../config/site';
+import { breadcrumbSchema, organizationSchema } from '../utils/schema';
+
+const description =
+  'Josh rents a flat, grows food on a small balcony, and writes down what works. The story behind Pot and Balcony and where it is heading.';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Josh and Pot and Balcony',
+  url: `${SITE.url}/about/`,
+  mainEntity: { '@type': 'Person', name: SITE.author.name, jobTitle: SITE.author.role, url: `${SITE.url}/about/` },
+};
+---
+
+<BaseLayout
+  title="About Josh and Pot and Balcony"
+  description={description}
+  jsonLd={[personSchema, breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About', path: '/about/' }]), organizationSchema()]}
+>
+  <header class="page-hero">
+    <div class="container about-hero">
+      <div>
+        <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'About' }]} />
+        <p class="kicker">About</p>
+        <h1>Hi, I&rsquo;m Josh.</h1>
+        <p class="lede">I rent a flat, I have a small balcony, and I&rsquo;m learning to grow food on it &mdash; properly, in public.</p>
+      </div>
+      <figure class="about-photo">
+        <!-- PLACEHOLDER: replace with a real photo of Josh -->
+        <img src={SITE.author.avatar} alt="Placeholder portrait of Josh" width="400" height="400" fetchpriority="high" />
+        <figcaption>that&rsquo;s me <em>(real photo soon)</em></figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <div class="page-body">
+    <div class="container container--narrow">
+      <PlaceholderBanner>
+        This About page is a draft skeleton. Everything in [square brackets] needs Josh&rsquo;s real details and voice. Rewrite it freely &mdash; this is the most personal page on the site.
+      </PlaceholderBanner>
+
+      <div class="prose">
+        <h2>How this started</h2>
+        <p>
+          [Josh: where do you live, what is your balcony like &mdash; size, direction, floor, wind? What was the first thing
+          you tried to grow, and what went wrong?]
+        </p>
+        <p>
+          Like a lot of renters, I hit the same walls again and again: I can&rsquo;t drill into anything, the balcony has a
+          weight limit nobody could quite explain, the wind is brutal up here, and winter shuts everything down. Most
+          growing advice assumes a garden. I didn&rsquo;t have one.
+        </p>
+
+        <h2>Why Pot and Balcony exists</h2>
+        <p>
+          I wanted the resource I couldn&rsquo;t find: honest, specific advice for people growing in tiny rented spaces,
+          from someone actually doing it. Real photos, real mistakes, real prices &mdash; and no pretending that an
+          expensive gadget is essential.
+        </p>
+
+
+        <h2>The long game: a farm</h2>
+        <p>
+          [Josh: describe your longer-term goal &mdash; the farm, smallholding or land you eventually want, and why. What
+          does the balcony teach you that you&rsquo;ll need later? What does &ldquo;success&rdquo; look like in five or ten years?]
+        </p>
+        <p>
+          The balcony is my training ground. Every guide here is a small experiment in growing more with less: less
+          space, less time, less money wasted on the wrong kit.
+        </p>
+
+        <h2>How this site is made</h2>
+        <p>
+          I&rsquo;ll be upfront: I use AI tools to help with research, drafting and publishing. What AI can&rsquo;t do is
+          stand on my balcony. The photos, the field notes and the verdicts on gear come from me. [Josh: adjust this
+          paragraph to describe your process in your own words.]
+        </p>
+
+        <h2>Ground rules</h2>
+        <ul>
+          <li>I only recommend gear I&rsquo;ve actually used &mdash; or I tell you plainly that I haven&rsquo;t.</li>
+          <li>Affiliate links are always disclosed, and they never decide what I recommend. <a href="/affiliate-disclosure/">Details here</a>.</li>
+          <li>If I get something wrong, I&rsquo;ll fix it and say so.</li>
+        </ul>
+
+        <h2>Say hello</h2>
+        <p>
+          Got a question, a correction, or a balcony horror story? <a href="/contact/">Get in touch</a> &mdash; I read everything.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-hero { display: grid; gap: var(--s-7); align-items: center; }
+  @media (min-width: 52rem) { .about-hero { grid-template-columns: 1.4fr 0.6fr; } }
+  .about-hero h1 { margin-bottom: var(--s-4); }
+  .about-photo { margin: 0; justify-self: center; }
+  .about-photo img { width: min(100%, 16rem); aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--forest); background: var(--olive); box-shadow: 8px 8px 0 var(--forest); }
+  .about-photo figcaption { font-family: var(--font-hand); font-weight: 600; font-size: 1.5rem; margin-top: var(--s-4); text-align: center; }
+  .about-photo em { font-style: normal; opacity: 0.8; }
+</style>

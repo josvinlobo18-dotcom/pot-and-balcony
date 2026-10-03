@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { PILLARS, PILLAR_ORDER, type PillarSlug } from '../../config/pillars';
+import { getArticlesByPillar } from '../../utils/articles';
+import { breadcrumbSchema, organizationSchema, abs } from '../../utils/schema';
+
+export function getStaticPaths() {
+  return PILLAR_ORDER.map((pillar) => ({ params: { pillar } }));
+}
+
+const { pillar: slug } = Astro.params as { pillar: PillarSlug };
+const pillar = PILLARS[slug];
+const articles = await getArticlesByPillar(slug);
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: pillar.title,
+  description: pillar.description,
+  url: abs(`/${slug}/`),
+  hasPart: articles.map((a) => ({ '@type': 'Article', headline: a.data.title, url: abs(`/${slug}/${a.id.split('/')[1]}/`) })),
+};
+---
+
+<BaseLayout
+  title={pillar.title}
+  description={pillar.description}
+  jsonLd={[
+    collectionSchema,
+    breadcrumbSchema([{ name: 'Home', path: '/' }, { name: pillar.title, path: `/${slug}/` }]),
+    organizationSchema(),
+  ]}
+>
+  <header class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: pillar.title }]} />
+      <p class="kicker">Pillar {pillar.number}</p>
+      <h1>{pillar.title}</h1>
+      <p class="lede">{pillar.intro}</p>
+      <ul class="topics">
+        {pillar.topics.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </header>
+
+  <section class="section section--cream">
+    <div class="container">
+      {articles.length > 0 ? (
+        <>
+          <p class="count muted">{articles.length} {articles.length === 1 ? 'guide' : 'guides'}, newest first</p>
+          <div class="card-grid">
+            {articles.map((article) => <ArticleCard article={article} />)}
+          </div>
+        </>
+      ) : (
+        <div class="empty-state"><p>{pillar.emptyMessage}</p></div>
+      )}
+
+      <nav class="other-pillars" aria-label="Other topics">
+        <h2>More to explore</h2>
+        <div class="btn-row">
+          {PILLAR_ORDER.filter((s) => s !== slug).map((s) => (
+            <a class="btn btn--ghost" href={`/${s}/`}>{PILLARS[s].title} <span aria-hidden="true">&rarr;</span></a>
+          ))}
+        </div>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 { margin-bottom: var(--s-5); }
+  .topics { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .topics li { font-size: var(--fs-xs); font-weight: 700; border: 2px solid var(--forest); border-radius: 999px; padding: 0.25rem 0.9rem; background: var(--cream); }
+  .count { font-size: var(--fs-sm); font-weight: 600; margin-bottom: var(--s-5); }
+  .other-pillars { margin-top: var(--s-9); padding-top: var(--s-7); border-top: 2px solid var(--moss); }
+  .other-pillars h2 { font-size: var(--fs-h3); margin-bottom: var(--s-5); }
+</style>

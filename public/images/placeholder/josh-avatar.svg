@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Placeholder portrait">
+  <rect width="400" height="400" fill="#ccd5ae"/>
+  <circle cx="200" cy="160" r="72" fill="#fefae0" stroke="#01472e" stroke-width="5"/>
+  <path d="M60 400c0-86 62-140 140-140s140 54 140 140Z" fill="#fefae0" stroke="#01472e" stroke-width="5"/>
+  <text x="200" y="368" text-anchor="middle" font-family="Impact, 'Arial Narrow', sans-serif" font-size="26" letter-spacing="2" fill="#01472e">PLACEHOLDER</text>
+</svg>

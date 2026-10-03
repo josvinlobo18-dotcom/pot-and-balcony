@@ -1,0 +1,50 @@
+---
+import '@fontsource/anton/400.css';
+import '@fontsource-variable/inter';
+import '@fontsource/caveat/600.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/prose.css';
+
+import SEO, { type Props as SEOProps } from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config/site';
+
+export type Props = SEOProps;
+const seo = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#01472e" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <SEO {...seo} />
+
+    <!-- Google Search Console verification — set SITE.gscVerification in src/config/site.ts -->
+    <meta name="google-site-verification" content={SITE.gscVerification} />
+
+    <!-- Google Analytics 4 -->
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.ga4Id}`}></script>
+    <script is:inline define:vars={{ gaId: SITE.analytics.ga4Id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
