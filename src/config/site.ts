@@ -21,9 +21,6 @@ export const SITE = {
     ga4Id: 'G-8YTW475HJF',
   },
 
-  // PLACEHOLDER — paste the content="" value Google Search Console gives you.
-  gscVerification: 'PLACEHOLDER_GSC_VERIFICATION_STRING',
-
   // Used for OG tags when a page has no image of its own.
   // PLACEHOLDER — replace /public/og-default.jpg with a designed 1200x630 image.
   defaultOgImage: '/og-default.jpg',
