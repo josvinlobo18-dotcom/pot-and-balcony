@@ -51,5 +51,58 @@
     "blurb": "Placeholder description of a freestanding, tiered greenhouse that extends the season on a small balcony.",
     "points": ["Freestanding — no fixing", "Roll-up zip door", "Folds flat for winter storage"],
     "placeholder": true
+  },
+
+  "sample-railing-clamp": {
+    "name": "Heavy-Duty Railing Clamp (Metal Fasteners)",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "price": "£19.99",
+    "priceChecked": "October 2026",
+    "badge": "Josh's pick",
+    "blurb": "Clamp-on balcony bracket with metal screws that will not strip after repeated adjustment.",
+    "points": ["No drilling or permanent marks", "Solid metal hardware", "Quick-release in 30 seconds"],
+    "placeholder": true
+  },
+
+  "sample-heavy-duty-hook": {
+    "name": "Heavy-Duty Railing S-Hooks (20kg rated)",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "price": "£9.99",
+    "priceChecked": "October 2026",
+    "blurb": "Sturdy steel S-hooks designed for wide balcony railings and macramé hanging planters.",
+    "points": ["Rated for up to 20kg", "Rust-resistant coating", "Zero fasteners needed"],
+    "placeholder": true
+  },
+
+  "sample-bamboo-ladder": {
+    "name": "Freestanding Bamboo Plant Ladder",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "price": "£39.99",
+    "priceChecked": "October 2026",
+    "blurb": "Leaning vertical plant ladder that holds tiered pots against the wall without wall fixings.",
+    "points": ["Weather-treated bamboo", "Compact footprint", "Secures with a simple bungee to railing"],
+    "placeholder": true
+  },
+
+  "sample-windbreak-panel": {
+    "name": "Clear Balcony Windbreak Screen",
+    "brand": "Sample Brand",
+    "retailer": "Amazon",
+    "url": "https://www.amazon.co.uk/dp/PLACEHOLDER-ASIN?tag=PLACEHOLDER-21",
+    "image": "/images/placeholder/product.svg",
+    "price": "£29.99",
+    "priceChecked": "October 2026",
+    "blurb": "Transparent wind mitigation panel that clips onto railings to prevent tall container crops from flattening.",
+    "points": ["Cuts high-floor wind gusts", "Maintains sunlight and views", "Ties to railing with no drilling"],
+    "placeholder": true
   }
 }

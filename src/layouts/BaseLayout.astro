@@ -26,7 +26,7 @@ const seo = Astro.props;
     <SEO {...seo} />
 
     <!-- Google Search Console verification — set SITE.gscVerification in src/config/site.ts -->
-    <meta name="google-site-verification" content={SITE.gscVerification} />
+    {SITE.gscVerification && <meta name="google-site-verification" content={SITE.gscVerification} />}
 
     <!-- Google Analytics 4 -->
     <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.ga4Id}`}></script>

@@ -10,7 +10,7 @@ const articles = defineCollection({
   loader: glob({ pattern: '*/*.md', base: './src/content/articles' }),
   schema: z
     .object({
-      title: z.string().min(10).max(70),
+      title: z.string().min(10).max(100),
       /** Optional shorter <title> if `title` is too long for search results (<= 60 chars). */
       seoTitle: z.string().max(60).optional(),
       description: z.string().min(70).max(165),
@@ -20,6 +20,14 @@ const articles = defineCollection({
       heroImage: z.string().startsWith('/').optional(),
       heroAlt: z.string().min(5).optional(),
       heroCaption: z.string().optional(),
+      hero: z
+        .object({
+          src: z.string(),
+          alt: z.string(),
+          caption: z.string().optional(),
+        })
+        .optional(),
+      pillar: z.string().optional(),
       tags: z.array(z.string()).default([]),
       /** Optional hand-picked related articles, as "pillar/slug" (file path without .md). */
       related: z.array(z.string()).default([]),
@@ -30,6 +38,12 @@ const articles = defineCollection({
       /** Marks sample content: shows a banner and sets noindex. */
       placeholder: z.boolean().default(false),
     })
+    .transform((data) => ({
+      ...data,
+      heroImage: data.heroImage ?? data.hero?.src,
+      heroAlt: data.heroAlt ?? data.hero?.alt,
+      heroCaption: data.heroCaption ?? data.hero?.caption,
+    }))
     .refine((d) => !d.heroImage || !!d.heroAlt, {
       message: 'heroAlt is required when heroImage is set',
       path: ['heroAlt'],
